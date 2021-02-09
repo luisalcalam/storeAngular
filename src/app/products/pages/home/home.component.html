@@ -1,0 +1,56 @@
+<mat-sidenav-container fullscreen>
+
+    <mat-sidenav color="primary" #sidenav mode="push">
+
+        <mat-toolbar color="primary">
+            <span>Menú</span>
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <a routerLink="./listado" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>label</mat-icon>
+                <span>Listado de Tazas</span>
+            </a>
+
+            <a routerLink="./entradas" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>add</mat-icon>
+                <span>Ingreso inventario</span>
+            </a>
+
+            <a routerLink="./catalogos" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>search</mat-icon>
+                <span>Catalogos</span>
+            </a>
+
+            <a routerLink="./tazas" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>local_cafe</mat-icon>
+                <span>Tazas</span>
+            </a>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span class="spacer"></span>
+
+        <!-- <button mat-button>
+            Logout
+        </button> -->
+    </mat-toolbar>
+
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>

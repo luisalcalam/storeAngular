@@ -1,0 +1,53 @@
+<mat-tab-group>
+    <mat-tab label="Calidad/Tipo">
+        <br>
+        <button mat-button color="primary" (click)="openNew()"><mat-icon mat-list-icon>add</mat-icon> Nuevo</button>
+        <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let type of types">
+                {{type.name}}
+                <span class="spacer"></span>
+                <button mat-button color="primary" (click)="openEdit(type)"><mat-icon mat-list-icon>mode_edit</mat-icon> Editar</button>
+            </mat-list-item>
+        </mat-list>
+    </mat-tab>
+    <mat-tab label="Color">
+        <button mat-button color="primary" (click)="openNewColor()"><mat-icon mat-list-icon>add</mat-icon> Nuevo</button>
+        <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let color of colors">
+                {{color.name}} ----- {{color.code}}
+                <span class="spacer"></span>
+                <button mat-button color="primary" (click)="openEditColor(color)"><mat-icon mat-list-icon>mode_edit</mat-icon> Editar</button>
+            </mat-list-item>
+        </mat-list>
+    </mat-tab>
+</mat-tab-group>
+
+<kendo-dialog [title]="title" *ngIf="opened" (close)="close('close')" [minWidth]="250" [width]="300">
+    <mat-form-field class="example-form-field" style="width: 100%;">
+        <mat-label>Tipo de taza</mat-label>
+        <input matInput type="text" [(ngModel)]="value">
+    </mat-form-field>
+    <br>
+    <div mat-dialog-actions>
+        <button mat-button color="primary" (click)="close('cancel')">Cancelar</button>
+        <span class="spacer"></span>
+        <button mat-button color="primary" (click)="close('confirm')" cdkFocusInitial>Guardar</button>
+    </div>
+</kendo-dialog>
+
+<kendo-dialog [title]="title" *ngIf="colorOpened" (close)="closeColor('close')" [minWidth]="250" [width]="300">
+    <mat-form-field class="example-form-field" style="width: 100%;">
+        <mat-label>Nombre de color</mat-label>
+        <input matInput type="text" [(ngModel)]="nameColorValue">
+    </mat-form-field>
+    <mat-form-field class="example-form-field" style="width: 100%;">
+        <mat-label>Codigo de color</mat-label>
+        <input matInput type="color" [(ngModel)]="codeColorValue">
+    </mat-form-field>
+    <br>
+    <div mat-dialog-actions>
+        <button mat-button color="primary" (click)="closeColor('cancel')">Cancelar</button>
+        <span class="spacer"></span>
+        <button mat-button color="primary" (click)="closeColor('confirm')" cdkFocusInitial>Guardar</button>
+    </div>
+</kendo-dialog>

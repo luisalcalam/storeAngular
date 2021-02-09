@@ -1,0 +1,46 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title> {{ cup.name }} </mat-card-title>
+        <mat-card-subtitle> {{ cup.type.name }} </mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image [src]="cup.imageurl">
+
+    <mat-card-content>
+        <h3>{{ cup.material }}</h3>
+        <p>
+            <strong>Capacidad:</strong> {{ cup.volume }}
+            <br>
+            <strong> Color: </strong> {{ cup.color.name }}
+        </p>
+        <div style="border-radius: 10px; border: 1px solid #000;" [ngStyle]="{'background-color':cup.color.code}">
+            <br>
+        </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-button color="warn" (click)="opened = true">
+            Agregar a orden
+        </button>
+
+        <!-- <button mat-button 
+                color="info">
+            Editar
+        </button> -->
+    </mat-card-actions>
+
+</mat-card>
+
+<kendo-dialog title="Confirme la cantidad" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+    <mat-form-field class="example-full-width">
+        <mat-label>Numero de egresos</mat-label>
+        <input type="number" matInput [(ngModel)]="cantidad" min="1" [max]="cup.cupsnumber">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-button color="primary" (click)="close('cancel')">Cancelar</button>
+        <span class="spacer"></span>
+        <button mat-button color="primary" (click)="close('confirm')" cdkFocusInitial>Confirmar</button>
+    </div>
+    <br>
+    <span>Stock disponible {{cup.cupsnumber}}</span>
+</kendo-dialog>

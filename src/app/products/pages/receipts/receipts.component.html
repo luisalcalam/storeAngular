@@ -1,0 +1,37 @@
+<h2>Agregar stock</h2>
+
+<button *ngIf="cupService.cupsSale.length > 0" mat-button color="primary" (click)="orderOpened = true">Ver orden</button>
+
+<mat-list role="list">
+    <mat-list-item *ngFor="let cup of cups" role="listitem">
+        {{cup.fullname}} --- Stock: {{cup.cupsnumber}}
+        <span class="spacer"></span>
+        <button mat-button color="primary" (click)="openPanel(cup)">Aumentar stock</button>
+    </mat-list-item>
+</mat-list>
+
+<kendo-dialog title="Confirme la cantidad" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+    <mat-form-field class="example-full-width">
+        <mat-label>Numero de ingresos</mat-label>
+        <input type="number" matInput [(ngModel)]="cantidad" min="1" [max]="cup.cupsnumber">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-button color="primary" (click)="close('cancel')">Cancelar</button>
+        <span class="spacer"></span>
+        <button mat-button color="primary" (click)="close('confirm')" cdkFocusInitial>Confirmar</button>
+    </div>
+    <br>
+    <span>Stock disponible {{cup.cupsnumber}}</span>
+</kendo-dialog>
+
+<kendo-dialog title="Confirme la cantidad" *ngIf="orderOpened" (close)="closeOrder('close')" [minWidth]="250" [width]="550">
+    <mat-list role="list">
+        <mat-list-item *ngFor="let sale of cupService.cupsSale" role="listitem">{{sale.cup.fullname}} <small style="margin-left: 2rem;">Cantidad: {{sale.cupsnum}}</small></mat-list-item>
+    </mat-list>
+    <br>
+    <div mat-dialog-actions>
+        <button mat-button color="primary" (click)="closeOrder('cancel')">Cancelar orden</button>
+        <span class="spacer"></span>
+        <button mat-button color="primary" (click)="closeOrder('confirm')" cdkFocusInitial>Confirmar</button>
+    </div>
+</kendo-dialog>

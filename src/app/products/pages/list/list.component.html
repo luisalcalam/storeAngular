@@ -1,0 +1,23 @@
+<h2>Listado de tazas</h2>
+
+<button *ngIf="cupService.cupsSale.length > 0" mat-button color="primary" (click)="opened = true">Ver orden</button>
+
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px">
+
+    <div fxFlex="20" fxFlex.lg="15" fxFlex.sm="30" *ngFor="let cup of cups">
+
+        <app-product-card [cup]="cup"></app-product-card>
+    </div>
+</div>
+
+<kendo-dialog title="Confirme la cantidad" *ngIf="opened" (close)="close('close')" [minWidth]="250" [width]="550">
+    <mat-list role="list">
+        <mat-list-item *ngFor="let sale of cupService.cupsSale" role="listitem">{{sale.cup.fullname}} <small style="margin-left: 2rem;">Cantidad: {{sale.cupsnum}}</small></mat-list-item>
+    </mat-list>
+    <br>
+    <div mat-dialog-actions>
+        <button mat-button color="primary" (click)="close('cancel')">Cancelar orden</button>
+        <span class="spacer"></span>
+        <button mat-button color="primary" (click)="close('confirm')" cdkFocusInitial>Confirmar</button>
+    </div>
+</kendo-dialog>
